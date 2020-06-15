@@ -5,6 +5,7 @@ import {
   Form,
   FormGroup,
   Input,
+  CustomInput,
   Dropdown,
   DropdownToggle,
   DropdownMenu,
@@ -19,23 +20,36 @@ const OrderForm = () => {
     name: "",
     number: 0,
     sauce: "",
-    protein: "",
-    cilantro: false,
-    onion: false,
-    lime: false,
-    avocado: false,
+    pepperoni: false,
+    sausage: false,
+    canadianBacon: false,
+    spicyItalianSausage: false,
+    grilledChicken: false,
+    onions: false,
+    greenPeppers: false,
+    dicedTomatoes: false,
+    roastedGarlic: false,
+    pinapple: false,
+    threeCheese: false,
+    glutenFree: false,
     special: "",
   });
   const schema = yup.object().shape({
     name: yup.string().required().min(2),
-    number: yup.number().required().positive().integer().min(1),
+    number: yup.number().required().positive().integer().min(10),
     sauce: yup.string().required(),
-    protein: yup.string().required(),
     special: yup.string().required(),
-    cilantro: yup.boolean(),
-    onion: yup.boolean(),
-    lime: yup.boolean(),
-    avocado: yup.boolean(),
+    pepperoni: yup.boolean(),
+    sausage: yup.boolean(),
+    canadianBacon: yup.boolean(),
+    spicyItalianSausage: yup.boolean(),
+    grilledChicken: yup.boolean(),
+    onions: yup.boolean(),
+    greenPeppers: yup.boolean(),
+    dicedTomatoes: yup.boolean(),
+    roastedGarlic: yup.boolean(),
+    pinapple: yup.boolean(),
+    threeCheese: yup.boolean(),
   });
   const submit = () => {
     schema.validate(formData).then(() => {
@@ -48,6 +62,9 @@ const OrderForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleToppings = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.checked });
+  };
+  const handleSubstitutions = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.checked });
   };
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -67,12 +84,27 @@ const OrderForm = () => {
           e.preventDefault();
           submit();
         }}
-        style={{ margin: "5%" }}
+        style={{ width: "40%", margin: "5%" }}
       >
+        {/* Name Field */}
+        <FormGroup>
+          <legend>Name</legend>
+          <Input
+            type="name"
+            name="name"
+            placeholder="Add your name here..."
+            value={formData.name}
+            onChange={handleChange}
+          />
+        </FormGroup>
+
+        {/* Size of Pizza Section */}
         <FormGroup>
           <Dropdown isOpen={dropdownOpen} toggle={toggle}>
             <DropdownToggle caret>
-              {formData.number === 0 ? "Size of Pizza" : formData.number}
+              {formData.number === 0
+                ? "Size of Pizza in Inches"
+                : formData.number}
             </DropdownToggle>
             <DropdownMenu>
               <div
@@ -86,40 +118,42 @@ const OrderForm = () => {
               <div
                 onClick={() => {
                   toggle();
-                  setFormData({ ...formData, number: 1 });
+                  setFormData({ ...formData, number: 10 });
                 }}
               >
-                1
+                10"
               </div>
               <div
                 onClick={() => {
                   toggle();
-                  setFormData({ ...formData, number: 2 });
+                  setFormData({ ...formData, number: 12 });
                 }}
               >
-                2
+                12"
               </div>
               <div
                 onClick={() => {
                   toggle();
-                  setFormData({ ...formData, number: 3 });
+                  setFormData({ ...formData, number: 14 });
                 }}
               >
-                3
+                14"
               </div>
               <div
                 onClick={() => {
                   toggle();
-                  setFormData({ ...formData, number: 4 });
+                  setFormData({ ...formData, number: 16 });
                 }}
               >
-                4
+                16"
               </div>
             </DropdownMenu>
           </Dropdown>
         </FormGroup>
+
+        {/* Sauce Section */}
         <FormGroup tag="fieldset">
-          <legend>Type of Sauce</legend>
+          <legend style={{ backgroundColor: "#87c7d1" }}>Type of Sauce</legend>
           <FormGroup check>
             <Label check>
               <Input
@@ -166,187 +200,166 @@ const OrderForm = () => {
           </FormGroup>
         </FormGroup>
 
-        <legend>Add Toppings</legend>
-        <h6>Choose up to 10</h6>
-        <FormGroup check>
-          <Label check>
-            <Input
-              type="checkbox"
-              name="pepperoni"
-              checked={formData.pepperoni}
-              onChange={handleToppings}
-            />
-            Pepperoni
-          </Label>
-        </FormGroup>
-        <FormGroup check>
-          <Label check>
-            <Input
-              type="checkbox"
-              name="sausage"
-              checked={formData.sausage}
-              onChange={handleToppings}
-            />
-            Sausage
-          </Label>
-        </FormGroup>
-        <FormGroup check>
-          <Label check>
-            <Input
-              type="checkbox"
-              name="canadian bacon"
-              checked={formData.canadianBacon}
-              onChange={handleToppings}
-            />
-            Canadian Bacon
-          </Label>
-        </FormGroup>
-        <FormGroup check>
-          <Label check>
-            <Input
-              type="checkbox"
-              name="spicy italian sausage"
-              checked={formData.spicyItalianSausage}
-              onChange={handleToppings}
-            />
-            Spicy Italian Sausage
-          </Label>
-        </FormGroup>
-        <FormGroup check>
-          <Label check>
-            <Input
-              type="checkbox"
-              name="grilled chicken"
-              checked={formData.grilledChicken}
-              onChange={handleToppings}
-            />
-            Grilled Chicken
-          </Label>
-        </FormGroup>
-        <FormGroup check>
-          <Label check>
-            <Input
-              type="checkbox"
-              name="onions"
-              checked={formData.onions}
-              onChange={handleToppings}
-            />
-            Onions
-          </Label>
-        </FormGroup>
-        <FormGroup check>
-          <Label check>
-            <Input
-              type="checkbox"
-              name="green peppers"
-              checked={formData.greenPeppers}
-              onChange={handleToppings}
-            />
-            Green Peppers
-          </Label>
-        </FormGroup>
-        <FormGroup check>
-          <Label check>
-            <Input
-              type="checkbox"
-              name="diced tomatoes"
-              checked={formData.dicedTomatoes}
-              onChange={handleToppings}
-            />
-            Diced Tomatoes
-          </Label>
-        </FormGroup>
-        <FormGroup check>
-          <Label check>
-            <Input
-              type="checkbox"
-              name="black olives"
-              checked={formData.blackOlives}
-              onChange={handleToppings}
-            />
-            Black Olives
-          </Label>
-        </FormGroup>
-        <FormGroup check>
-          <Label check>
-            <Input
-              type="checkbox"
-              name="roasted garlic"
-              checked={formData.roastedGarlic}
-              onChange={handleToppings}
-            />
-            Roasted Garlic
-          </Label>
-        </FormGroup>
-        <FormGroup check>
-          <Label check>
-            <Input
-              type="checkbox"
-              name="artichoke hearts"
-              checked={formData.artichokeHearts}
-              onChange={handleToppings}
-            />
-            Artichoke Hearts
-          </Label>
-        </FormGroup>
-        <FormGroup check>
-          <Label check>
-            <Input
-              type="checkbox"
-              name="pineapple"
-              checked={formData.pinapple}
-              onChange={handleToppings}
-            />
-            Pineapple
-          </Label>
-        </FormGroup>
-        <FormGroup check>
-          <Label check>
-            <Input
-              type="checkbox"
-              name="three cheese"
-              checked={formData.cheese}
-              onChange={handleToppings}
-            />
-            Three Cheese
-          </Label>
-        </FormGroup>
-        <FormGroup check>
-          <Label check>
-            <Input
-              type="checkbox"
-              name="extra cheese"
-              checked={formData.extraCheese}
-              onChange={handleToppings}
-            />
-            Extra Cheese
-          </Label>
-        </FormGroup>
-
-        <FormGroup check>
-          <legend>Substitutions</legend>
-          <h6>Choose up to 1</h6>
-          <Label check>
-            <Input
-              type="checkbox"
-              name="gluten free"
-              checked={formData.glutenFree}
-              onChange={handleToppings}
-            />
-            Gluten Free Crust ($100)
-          </Label>
-        </FormGroup>
-
+        {/* Toppings Section */}
         <FormGroup>
-          <legend>Special Instructions</legend>
+          <legend style={{ backgroundColor: "#87c7d1" }}>Add Toppings</legend>
+          <h6>Choose up to 4</h6>
+          <FormGroup check>
+            <Label check>
+              <Input
+                type="checkbox"
+                name="canadianBacon"
+                checked={formData.canadianBacon}
+                onChange={handleToppings}
+              />
+              Canadian Bacon
+            </Label>
+          </FormGroup>
+          <FormGroup check>
+            <Label check>
+              <Input
+                type="checkbox"
+                name="grilledChicken"
+                checked={formData.grilledChicken}
+                onChange={handleToppings}
+              />
+              Grilled Chicken
+            </Label>
+          </FormGroup>
+          <FormGroup check>
+            <Label check>
+              <Input
+                type="checkbox"
+                name="pepperoni"
+                checked={formData.pepperoni}
+                onChange={handleToppings}
+              />
+              Pepperoni
+            </Label>
+          </FormGroup>
+          <FormGroup check>
+            <Label check>
+              <Input
+                type="checkbox"
+                name="sausage"
+                checked={formData.sausage}
+                onChange={handleToppings}
+              />
+              Sausage
+            </Label>
+          </FormGroup>
+          <FormGroup check>
+            <Label check>
+              <Input
+                type="checkbox"
+                name="spicyItalianSausage"
+                checked={formData.spicyItalianSausage}
+                onChange={handleToppings}
+              />
+              Spicy Italian Sausage
+            </Label>
+          </FormGroup>
+          <FormGroup check>
+            <Label check>
+              <Input
+                type="checkbox"
+                name="dicedTomatoes"
+                checked={formData.dicedTomatoes}
+                onChange={handleToppings}
+              />
+              Diced Tomatoes
+            </Label>
+          </FormGroup>
+          <FormGroup check>
+            <Label check>
+              <Input
+                type="checkbox"
+                name="greenPeppers"
+                checked={formData.greenPeppers}
+                onChange={handleToppings}
+              />
+              Green Peppers
+            </Label>
+          </FormGroup>
+          <FormGroup check>
+            <Label check>
+              <Input
+                type="checkbox"
+                name="onions"
+                checked={formData.onions}
+                onChange={handleToppings}
+              />
+              Onions
+            </Label>
+          </FormGroup>
+          <FormGroup check>
+            <Label check>
+              <Input
+                type="checkbox"
+                name="pineapple"
+                checked={formData.pineapple}
+                onChange={handleToppings}
+              />
+              Pineapple
+            </Label>
+          </FormGroup>
+          <FormGroup check>
+            <Label check>
+              <Input
+                type="checkbox"
+                name="roastedGarlic"
+                checked={formData.roastedGarlic}
+                onChange={handleToppings}
+              />
+              Roasted Garlic
+            </Label>
+          </FormGroup>
+          <FormGroup check>
+            <Label check>
+              <Input
+                type="checkbox"
+                name="threeCheese"
+                checked={formData.threeCheese}
+                onChange={handleToppings}
+              />
+              Three Cheese
+            </Label>
+          </FormGroup>
+        </FormGroup>
+
+        {/* Substitutions Section */}
+        <FormGroup>
+          <legend style={{ backgroundColor: "#87c7d1" }}>Substitutions</legend>
+          <h6>Choose up to 1</h6>
+          <FormGroup>
+            <Label>
+              <CustomInput
+                type="switch"
+                name="glutenFree"
+                checked={formData.glutenFree}
+                onChange={handleSubstitutions}
+                id="glutenFree"
+              />
+              Gluten Free Crust (+ $100)
+            </Label>
+          </FormGroup>
+        </FormGroup>
+
+        {/* Special Instructions Section */}
+        <FormGroup>
+          <legend style={{ backgroundColor: "#87c7d1" }}>
+            Special Instructions
+          </legend>
           <Input
             type="textarea"
             name="special"
+            placeholder="Add special instructions here..."
             value={formData.special}
             onChange={handleChange}
           />
         </FormGroup>
-        <Button>Submit</Button>
+
+        <Button>Place Order</Button>
       </Form>
     </>
   );
