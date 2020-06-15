@@ -80,6 +80,7 @@ const OrderForm = () => {
         ></CardImg>
       </Card>
       <Form
+        data-cy="submit"
         onSubmit={(e) => {
           e.preventDefault();
           submit();
@@ -95,6 +96,7 @@ const OrderForm = () => {
             placeholder="Add your name here..."
             value={formData.name}
             onChange={handleChange}
+            data-cy="name"
           />
         </FormGroup>
 
@@ -211,6 +213,7 @@ const OrderForm = () => {
                 name="canadianBacon"
                 checked={formData.canadianBacon}
                 onChange={handleToppings}
+                data-cy="checkbox1"
               />
               Canadian Bacon
             </Label>
@@ -222,6 +225,7 @@ const OrderForm = () => {
                 name="grilledChicken"
                 checked={formData.grilledChicken}
                 onChange={handleToppings}
+                data-cy="checkbox2"
               />
               Grilled Chicken
             </Label>
@@ -233,6 +237,7 @@ const OrderForm = () => {
                 name="pepperoni"
                 checked={formData.pepperoni}
                 onChange={handleToppings}
+                data-cy="checkbox3"
               />
               Pepperoni
             </Label>
@@ -244,6 +249,7 @@ const OrderForm = () => {
                 name="sausage"
                 checked={formData.sausage}
                 onChange={handleToppings}
+                data-cy="checkbox4"
               />
               Sausage
             </Label>
@@ -255,6 +261,7 @@ const OrderForm = () => {
                 name="spicyItalianSausage"
                 checked={formData.spicyItalianSausage}
                 onChange={handleToppings}
+                data-cy="checkbox5"
               />
               Spicy Italian Sausage
             </Label>
@@ -266,6 +273,7 @@ const OrderForm = () => {
                 name="dicedTomatoes"
                 checked={formData.dicedTomatoes}
                 onChange={handleToppings}
+                data-cy="checkbox6"
               />
               Diced Tomatoes
             </Label>
@@ -277,6 +285,7 @@ const OrderForm = () => {
                 name="greenPeppers"
                 checked={formData.greenPeppers}
                 onChange={handleToppings}
+                data-cy="checkbox7"
               />
               Green Peppers
             </Label>
@@ -288,6 +297,7 @@ const OrderForm = () => {
                 name="onions"
                 checked={formData.onions}
                 onChange={handleToppings}
+                data-cy="checkbox8"
               />
               Onions
             </Label>
@@ -299,6 +309,7 @@ const OrderForm = () => {
                 name="pineapple"
                 checked={formData.pineapple}
                 onChange={handleToppings}
+                data-cy="checkbox9"
               />
               Pineapple
             </Label>
@@ -310,6 +321,7 @@ const OrderForm = () => {
                 name="roastedGarlic"
                 checked={formData.roastedGarlic}
                 onChange={handleToppings}
+                data-cy="checkbox10"
               />
               Roasted Garlic
             </Label>
@@ -321,6 +333,7 @@ const OrderForm = () => {
                 name="threeCheese"
                 checked={formData.threeCheese}
                 onChange={handleToppings}
+                data-cy="checkbox11"
               />
               Three Cheese
             </Label>
